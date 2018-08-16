@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The goal of this simple exercise is to create a very basic chatbot, that is able to answer a few simple questions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.clevy.io/alexis.laurent.external/backend.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
