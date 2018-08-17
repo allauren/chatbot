@@ -1,6 +1,7 @@
 const https = require ('https')
 const ids = require('../config/keys.js')
 
+let errmessage = 'Be gentle and communicate with me with an understable message'
 //options for the request
 let options = {
 	host: 'api.recast.ai',
@@ -11,22 +12,23 @@ let options = {
 		'Authorization' :'Token ' + ids.token ,
 	}
 }
-
+// when the request end
 let endRequest = (response, callback) =>{
 	response = JSON.parse(response)
-	if (response.results && response.results.intents[0])
+	if (response && response.results && response.results.intents[0])
 	{
-		response = response.results.intents[0].slug
-		return callback(null, response)
+		if ((response = response.results.intents[0].slug))
+			return callback(null, response)
+		else
+			return callback(errmessage)
 	}
 	else
 	{
-		return callback('Be gentle and communicate with me with an understable message')
+		return callback(errmessage)
 	}
 }
-
+// POST request to recast ai to analyse the input
 module.exports = (str, callback) => {
-// datas for the request
 	if (!str)
 	{
 		return callback('missing parameters')
@@ -35,7 +37,6 @@ module.exports = (str, callback) => {
 		'text': str,
 		'language': 'EN',
 	})
-	// request to send
 	let req = https.request(options, (res) => {
 		let response = ''
 

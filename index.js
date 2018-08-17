@@ -22,5 +22,4 @@ recast(param, (err, data) =>{
 		if (err)
 			return display(param, err)
 		display(param, data)})
-}
-)
+})

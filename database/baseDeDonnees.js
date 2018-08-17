@@ -1,5 +1,6 @@
 const mongoose = require ('mongoose')
 const keys = require ('../config/keys')
+
 let Schema =  mongoose.Schema
 let template = new Schema({
 	question : String,
@@ -8,18 +9,19 @@ let template = new Schema({
 let botlogs = mongoose.model('clevy', template)
 
 module.exports = (question, answer) =>{
-	mongoose.connect(keys.mgurl, { useNewUrlParser: true },  (err) =>{
-		if (!err)
+	mongoose.connect(keys.mgurl, {useNewUrlParser: true},  (err) =>{
+		if (err)
 		{
-			let log = new botlogs({
-				question : question,
-				answer : answer,
-			})
-			log.save((err) =>{
-				if (err)
-					console.log(err)
-				mongoose.connection.close()
-			})
+			return
 		}
+		let log = new botlogs({
+			question : question,
+			answer : answer,
+		})
+		log.save((err) =>{
+			if (err)
+				console.log(err)
+			mongoose.connection.close()
+		})
 	})
 }
