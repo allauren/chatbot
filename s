@@ -1,4 +1,5 @@
 # Logs
+config/keys.js
 logs
 *.log
 npm-debug.log*
