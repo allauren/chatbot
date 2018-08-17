@@ -13,7 +13,7 @@ module.exports = (folder, equiv, callback) => {
 			return randomuser ((err, data) =>{
 				if (err)
 					return (err)
-				return callback (null, first[1].replace('${name}', data))
+				return callback (null, first[1].indexOf('${name}') != -1 ? first[1].replace('${name}', data) : first[1])
 			})
 		}
 	}
